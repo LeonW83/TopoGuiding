@@ -67,8 +67,6 @@ def evaluate(masks, gt_labels, topo_dim: int=0, num_classes: int =None, mask_mod
         betti_numbers.append(betti_num)
 
     betti_numbers = torch.tensor(betti_numbers, device="cpu")
-    if num_classes is None:
-        num_classes = int(torch.max(gt_labels).item()) + 1 # estimate nuber of classes from ground truth labels present
 
 
     acc = accuracy_score(gt_labels.cpu().numpy(), betti_numbers.numpy())
@@ -76,6 +74,7 @@ def evaluate(masks, gt_labels, topo_dim: int=0, num_classes: int =None, mask_mod
     precision, recall, macro_f1, support = precision_recall_fscore_support(
         gt_labels.cpu().numpy(),
         betti_numbers.cpu().numpy(),
+        labels=np.unique(gt_labels.cpu().numpy()),
         average="macro",
         zero_division=0
     )
@@ -145,6 +144,7 @@ def evaluate_from_disk(path="../results/shapes/", topo_dim: int=0, batch_size: i
     precision, recall, macro_f1, support = precision_recall_fscore_support(
         labels.cpu().numpy(),
         betti_numbers.cpu().numpy(),
+        labels=np.unique(labels.cpu().numpy()),
         average="macro",
         zero_division=0
     )
