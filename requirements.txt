@@ -1,0 +1,12 @@
+cripser==0.0.33
+diffusers==0.38.0
+gudhi==3.13.0
+matplotlib==3.11.1
+numpy==2.4.6
+pandas==3.0.5
+Pillow==12.3.0
+pytorch_lightning==2.6.1
+scikit_learn==1.9.0
+scipy==1.18.1
+torch==2.11.0
+torchvision==0.26.0
